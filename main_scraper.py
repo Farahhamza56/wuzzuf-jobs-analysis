@@ -1,9 +1,8 @@
-
 from src.scraper import scrape_openfoodfacts, save_raw_data
+
 
 def main():
     print("\nOPEN FOOD FACTS DATA SCRAPER - FINAL RUN\n")
-
 
     NUM_PAGES = 10
     PAGE_SIZE = 100
@@ -22,6 +21,6 @@ def main():
     print("\n✓ FULL DATA COLLECTION COMPLETED!")
     print(f"  CSV file ready for inspection & cleaning: {filepath}\n")
 
+
 if __name__ == "__main__":
     main()
-
