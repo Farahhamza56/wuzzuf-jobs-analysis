@@ -4,7 +4,7 @@ from src.scraper import scrape_openfoodfacts, save_raw_data
 def main():
     print("\nOPEN FOOD FACTS DATA SCRAPER - FINAL RUN\n")
 
-    NUM_PAGES = 10
+    NUM_PAGES = 40
     PAGE_SIZE = 100
     DELAY = 2
 
