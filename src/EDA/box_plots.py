@@ -1,76 +1,11 @@
 import ast
-from statistics import median
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from IPython.core.pylabtools import figsize
-from fontTools.misc.cython import returns
-from matplotlib.style.core import available
-from wordcloud import WordCloud
 import os
 
-def main():
-    if not os.path.exists("data/cleaned/openfoodfacts_cleaned.csv"):
-        print("Error")
-        return
-    print("Loading")
-
-
-
-
 # Load cleaned data
-df = pd.read_csv("data/cleaned/openfoodfacts_cleaned.csv")
-
-# print("\nColumns in dataset:")
-# print(df.columns)
-# #print(df.head(20))
-text = " ".join(str(name) for name in df['product_name'].dropna())
-wordcloud = WordCloud(width = 900, height = 900).generate(text)
-# Display the generated image:
-plt.figure(figsize = (8, 8)) 
-plt.imshow(wordcloud)
-plt.axis("off")
-plt.show()
-
-#bar chart for most country has products
-
-# Count number of products per country
-
-country_counts = df['countries'].value_counts().head(20)  # Top 20 countries
-
-# Create a bar chart
-
-plt.figure(figsize=(12,6))
-plt.bar(country_counts.index, country_counts.values, color='skyblue')
-plt.xticks(rotation=45, ha='right')
-plt.title('Number of Products per Country (Top 20)')
-plt.xlabel('Country')
-plt.ylabel('Number of Products')
-plt.tight_layout()
-plt.show()
-#its clear that france has the most products 
-#bar chart for most product in france 
-
-# Filter data for France
-
-df_france = df[df['countries'].str.contains('France', case=False, na=False)]
-
-# Count top 20 products
-
-top_products = df_france['product_name'].value_counts().head(20)
-
-plt.figure(figsize=(12,6))
-plt.bar(top_products.index, top_products.values, color='salmon')
-plt.xticks(rotation=90, ha='right')
-plt.title('Top 20 Products in France')
-plt.xlabel('Product Name')
-plt.ylabel('Number of Occurrences')
-plt.tight_layout()
-plt.show()
-
-
-
+df = pd.read_csv("../../data/cleaned/openfoodfacts_cleaned.csv")
 
 #parsing & boxplot
 def parse_nutriments(df):
@@ -167,13 +102,12 @@ def showStatistics(df):
     stats_df = df[available_cols].describe()
     print(stats_df.round(2))
     return stats_df
-# في نهاية الملف
+
 df = parse_nutriments(df)
 boxplots(df)
 showStatistics(df)
 
-# حفظ الداتا
-parsed_dir = 'data/parsed'
+parsed_dir = '../data/parsed'
 os.makedirs(parsed_dir, exist_ok=True)
 df.to_csv(os.path.join(parsed_dir, 'openfoodfacts_parsed.csv'),
          index=False, encoding='utf-8-sig')

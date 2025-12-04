@@ -4,7 +4,6 @@ from datetime import datetime
 import os
 import time
 
-
 def get_page_data(page=1, page_size=500, max_retries=3):
     url = f"https://world.openfoodfacts.org/cgi/search.pl?action=process&json=1&page_size={page_size}&page={page}"
 
@@ -70,7 +69,7 @@ def scrape_openfoodfacts(num_pages=10, page_size=500, delay=2):
 
 
 def save_raw_data(df, filename=None):
-    raw_data_dir = 'data/raw'
+    raw_data_dir = '../data/raw'
     os.makedirs(raw_data_dir, exist_ok=True)
 
     if filename is None:

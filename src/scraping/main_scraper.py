@@ -1,5 +1,4 @@
-from src.scraper import scrape_openfoodfacts, save_raw_data
-
+from src.scraping.scraper import scrape_openfoodfacts, save_raw_data
 
 def main():
     print("\nOPEN FOOD FACTS DATA SCRAPER - FINAL RUN\n")

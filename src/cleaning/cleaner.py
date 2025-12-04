@@ -1,5 +1,3 @@
-import pandas as pd
-
 def inspect_data(df):
     print("\n=== DATA INSPECTION ===")
     print("\nGeneral info:")

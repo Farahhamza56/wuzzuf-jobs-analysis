@@ -1,12 +1,11 @@
-from src.cleaner import inspect_data, clean_data
+from src.cleaning.cleaner import inspect_data, clean_data
 import pandas as pd
 import os
-
 
 def main():
     print("\nOPEN FOOD FACTS DATA CLEANING\n")
 
-    raw_dir = 'data/raw'
+    raw_dir = '../../data/raw'
 
     if not os.path.exists(raw_dir):
         print(f"✗ Error: Directory '{raw_dir}' not found!")
@@ -38,7 +37,7 @@ def main():
     df_cleaned = clean_data(df)
 
 
-    cleaned_dir = 'data/cleaned'
+    cleaned_dir = '../../data/cleaned'
     os.makedirs(cleaned_dir, exist_ok=True)
 
     cleaned_filepath = os.path.join(cleaned_dir, 'openfoodfacts_cleaned.csv')
