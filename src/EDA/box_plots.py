@@ -64,13 +64,27 @@ def boxplots(df, output_dir='visualization'):
         #statistics
         median=data.median()
         mean= data.mean()
-        plt.axhline(median,color='red',linestyle='--',linewidth=1,label=f'Median: {median:.2f}')
-        plt.axhline(mean, color='green', linestyle='--', linewidth=1, label=f'Mean: {mean:.2f}')
-        plt.legend()
+        std= data.std()
+
+        print(f"{col.replace('_', ' ').title():15} | Mean: {mean:6.2f} | Median: {median:6.2f} | Count: {len(data):6} | Std: {std:6.2f}")
+
+        stats_text = f"Mean: {mean:.2f}g\nMedian: {median:.2f}g\nStd: {std:.2f}g"
+
+        plt.text(0.02, 0.98, stats_text,
+                 fontsize=11,
+                 fontweight='bold',
+                 verticalalignment='top',
+                 horizontalalignment='left',
+                 bbox=dict(facecolor="lightyellow", edgecolor="black", alpha=0.9))
+
+        plt.title(f'Distribution of {col.replace("_", " ").title()} (per 100g)',
+                  fontsize=14, fontweight='bold', pad=20)
+        plt.xlabel(f'{col.replace("_", " ").title()} (per 100g)', fontsize=12)
 
         filepath = os.path.join(output_dir,f'boxplot_{col}.png')
         plt.tight_layout()
         plt.savefig(filepath,dpi=300, bbox_inches='tight')
+        # plt.show()
         plt.close()
         print(f"saved: {filepath}")
     #create combined plot with all nutrients
